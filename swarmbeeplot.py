@@ -14,15 +14,33 @@ data = load_iris()
 
 data_cms = data.data
 target = data.target
+target_names = data.target_names
+# print target_names
+
 target_reshape = np.reshape(data.target, (len(data.target),1))
 data_and_target =  np.concatenate((data_cms, target_reshape), axis=1)
 
+df_target_names = pd.DataFrame(target_names,columns=['species'])
+# print df_target_names
+
 # converting numpy to pandas dataframe
+# df_features doesn't have species name so we will merge with target names to get species names
 
-df = pd.DataFrame(data_and_target, columns=['sepal length (cm)','sepal width (cm)',
-	                                       'petal length (cm)', 'petal width (cm)', 'target flower'])
+df_features = pd.DataFrame(data_and_target, columns=['sepal length (cm)','sepal width (cm)',
+	                                       'petal length (cm)', 'petal width (cm)', 'species_id'])
+df = pd.merge(df_features,df_target_names,left_on ='species_id', right_index = True)
 
-print df
+# Create bee swarm plot with Seaborn's default settings
+_ = sns.swarmplot(x = 'species', y='petal length (cm)', data=df)
+
+
+# Label the axes
+_ = plt.xlabel('species')
+_ = plt.ylabel('petal length (cm)')
+
+
+# Show the plot
+plt.show()
 
 
 
