@@ -1,10 +1,13 @@
 from sklearn.datasets import load_iris
 import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 data = load_iris()
 
 versicolor_petal_length = data.data[np.where(data.target == 1)][:,2]
 versicolor_petal_width = data.data[np.where(data.target == 1)][:,3]
+
+sns.set()
 
 # Make a scatter plot
 
