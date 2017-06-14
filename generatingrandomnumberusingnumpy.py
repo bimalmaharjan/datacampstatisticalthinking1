@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import empiricalcumulativedistribution as ecdf
 # Seed the random number generator
 
 import seaborn as sns
@@ -58,3 +59,26 @@ _ = plt.ylabel('probability')
 
 # Show the plot
 plt.show()
+
+
+# Compute ECDF: x, y
+x,y = ecdf.ecdf(n_defaults)
+
+
+# Plot the ECDF with labeled axes
+_ = plt.plot(x,y, marker='.',linestyle='none')
+_ = plt.xlabel('interest rate')
+_ = plt.ylabel('probability of losing money')
+
+
+# Show the plot
+plt.show()
+
+
+# Compute the number of 100-loan simulations with 10 or more defaults: n_lose_money
+n_lose_money = np.sum(n_defaults >= 10)
+    
+
+
+# Compute and print probability of losing money
+print('Probability of losing money =', n_lose_money / float(len(n_defaults)))
