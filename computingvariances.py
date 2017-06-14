@@ -25,3 +25,11 @@ variance_np = np.var(versicolor_petal_length)
 # Print the results
 
 print ( variance_explicit, variance_np)
+
+# Print the square root of the variance
+
+print (variance_np ** 0.5)
+
+
+# Print the standard deviation
+print (np.std(versicolor_petal_length))
